@@ -1,2 +1,4 @@
 # Proyecto1-ProgAvanzada
-Repositorio del Proyecto 1
+Agenda de Contactos en C
+
+Repositorio del Proyecto 1 para la clase de Prog. Avanzada.
