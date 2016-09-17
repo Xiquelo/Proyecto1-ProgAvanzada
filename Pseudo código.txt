@@ -1,0 +1,29 @@
+Pseudo código
+
+Inicio del programa
+	Mostrar en pantalla menú inicial de la agenda
+		1. Nuevo contacto
+			Ingresar Nombre y Teléfono de Contacto (Separados por una coma)
+			Leer nuevo contacto
+			Preguntar al usuario: ¿Desea guardar los datos del nuevo contacto?
+			Mostrar datos del nuevo contacto
+			Si usuario accede
+				Abrir agenda ("agenda.txt")
+				Añadir contacto al final de la lista de contactos
+				Cerrar agenda
+			De lo contrario
+				Volver a ingresar datos de nuevo contacto
+
+		2. Mostrar Contactos
+			Abrir agenda ("agenda.txt")
+			Leer datos de agenda
+			Mostrar en pantalla datos de agenda
+			Cerrar agenda
+
+		3. Borrar Contacto
+			Abrir agenda ("agenda.txt")
+			Leer datos de agenda
+			Mostrar en pantalla datos de agenda
+			Ingresar el no. de contacto que desea borrar
+
+		4. Salir

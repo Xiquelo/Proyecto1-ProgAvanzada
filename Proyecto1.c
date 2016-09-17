@@ -1,32 +1,32 @@
 #include <stdio.h>
-#include <stlib.h>
-#include <conio.h>
-#include <string.h>
+#include <stdlib.h>
+#define MAX 100
 
 typedef struct contacto
 {
-	char nombre[30]
-	int telefono[10]
+	char nombre[30];
+	int telefono;
 } CONTACTO;
 
 void NewContact()
 {
 	CONTACTO new;
-	char select s, n;
 
-	printf("\n\t Introduzca los datos del nuevo contacto: \n");
-	scanf("%s,%d", &new.nombre, &new.telefono);
+	printf("\nIntroduzca los datos del nuevo contacto: \n\t");
+	scanf("%s %d", new.nombre, &new.telefono);
 
-	printf("\n Se ha ingresado el contacto con el nombre: %s", new.nombre);
-	printf("\n Con el no. de teléfono: %d", new.telefono);
-	printf("\n ¿Desea guardar este nuevo contacto? S/N");
+	printf("\n\tNuevo contacto: %s %d", new.nombre, new.telefono);
+	printf("\n\n\tContacto guardado con éxito\n\n");
 
-	if(select = s)
-		FILE *agenda;
-		agenda=fopen ("agenda.txt", "r+");
-		fseek (pf, 0, SEEK_END);
-		fprintf(agenda, "\n%s\t\t%d", new.nombre, new.telefono);
-		fclose(agenda);
+	FILE *agenda;
+
+	agenda=fopen("agenda.txt","r+");
+
+	fseek(agenda, 0, SEEK_END);
+
+	fprintf(agenda, "\n%s\t\t\t%d", new.nombre, new.telefono);
+
+	fclose(agenda);
 }
 
 void LoadContacts()
@@ -50,17 +50,81 @@ void LoadContacts()
 
 void DelContact()
 {
-	int 1, linea, NUMlineas=0;
+	int l, linea, NUMlineas=0;
 	char LINEA[MAX], c, ch;
 	FILE *destino, *agenda;
 	
 	printf("\n Lista actual de contactos: \n");
 	LoadContacts();
+	
 	printf("Introduzca el no. de contacto a eliminar: ");
-	scanf("%d", &1);
+	scanf("%d", &l);
 
-	linea=1+3;
+	linea=l+3;
 
 	agenda=fopen("agenda.txt", "r+");
-	destino=fopen("age")
+	destino=fopen("tmp.txt", "w+"); //se crea archivo temporal
+
+	//se leen todas las lineas de agenda.tx
+	while(fgets(LINEA, MAX, agenda)!=NULL)
+	{
+		if ((ch=getc(agenda))!=EOF)
+			ungetc(ch, agenda);
+			NUMlineas++;
+		if (NUMlineas!=linea)
+		{
+			fputs(LINEA, destino);
+		}
+	}
+
+	printf("\n\n Contacto eliminado con éxito\n\n");
+	fclose(agenda);
+	fclose(destino);
+	remove("agenda.txt");
+	rename("tmp.txt", "agenda.txt");
+}
+
+int main()
+{
+	int op;
+	FILE *agenda;
+
+	agenda=fopen("agenda.txt", "r");
+
+	if (agenda==NULL)
+	{
+		fclose(agenda);
+		agenda=fopen("agenda.txt", "w+");
+
+		fprintf(agenda, "\tAGENDA PERSONAL\n");
+		fprintf(agenda, "\nNOMBRE\t\t\tTELÉFONO");
+		fclose(agenda);
+	}
+
+	printf("\n\n\nBIENVENIDO A TU AGENDA PERSONAL\n");
+	printf("\t1.Nuevo Contacto\n\t2.Ver Contactos\n\t3.Borrar Contacto\n\t4.Salir\n\nOpción: ");
+	scanf("%d", &op);
+
+		switch(op)
+		{
+			case 1:
+				NewContact();
+				break;
+
+			case 2:
+				LoadContacts();
+				break;
+
+			case 3:
+				DelContact();
+				break;
+
+			case 4:
+				break;
+
+			default:
+				printf("Opción no válida\n\n");
+		}
+
+	return 0;
 }
